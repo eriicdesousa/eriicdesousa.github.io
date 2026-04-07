@@ -1,0 +1,24 @@
+---
+layout: null
+permalink: /feed.xml
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>{{ site.title }}</title>
+    <link>{{ site.url }}/</link>
+    <description>{{ site.description }}</description>
+    <language>en-us</language>
+    <lastBuildDate>{{ site.time | date_to_rfc822 }}</lastBuildDate>
+
+    {% for post in site.posts %}
+    <item>
+      <title>{{ post.title | xml_escape }}</title>
+      <link>{{ site.url }}{{ post.url | replace: 'index.html', '' }}</link>
+      <guid isPermaLink="true">{{ site.url }}{{ post.url | replace: 'index.html', '' }}</guid>
+      <description>{{ post.description | xml_escape }}</description>
+      <pubDate>{{ post.date | date_to_rfc822 }}</pubDate>
+    </item>
+    {% endfor %}
+  </channel>
+</rss>

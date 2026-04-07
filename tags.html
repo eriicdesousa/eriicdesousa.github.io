@@ -1,0 +1,26 @@
+---
+layout: page
+title: "Tags"
+description: "Browse posts by topic."
+permalink: /tags/
+---
+
+<section class="section">
+  <h1>Tags</h1>
+  <p class="intro">Topic pages for every tag used across the blog.</p>
+  {% assign sorted_tags = site.tags | sort %}
+  {% if sorted_tags == empty %}
+    <p class="intro">No tags are available yet.</p>
+  {% else %}
+    <ul class="tag-list">
+      {% for tag in sorted_tags %}
+        {% assign tag_name = tag[0] %}
+        {% assign posts = tag[1] %}
+        <li>
+          <a href="/tags/{{ tag_name | slugify }}/">{{ tag_name }}</a>
+          <span class="meta">{{ posts | size }} post{% if posts.size != 1 %}s{% endif %}</span>
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+</section>

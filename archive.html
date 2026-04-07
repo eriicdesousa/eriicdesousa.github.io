@@ -1,0 +1,32 @@
+---
+layout: page
+title: "Archive"
+description: "Browse the full archive of published posts."
+permalink: /archive/
+---
+
+<section class="section">
+  <h1>Archive</h1>
+  <p class="intro">All published posts, grouped by year.</p>
+
+  {% assign posts_by_year = site.posts | group_by_exp: "post", "post.date | date: '%Y'" | reverse %}
+
+  {% if site.posts == empty %}
+    <p class="intro">There are no posts to display yet.</p>
+  {% else %}
+    {% for year in posts_by_year %}
+      <section class="archive-year">
+        <h2>{{ year.name }}</h2>
+        <ul class="archive-list">
+          {% assign year_posts = year.items | sort: "date" | reverse %}
+          {% for post in year_posts %}
+            <li>
+              <a href="{{ post.url }}">{{ post.title }}</a>
+              <span class="meta">{{ post.date | date: "%B %d, %Y" }}</span>
+            </li>
+          {% endfor %}
+        </ul>
+      </section>
+    {% endfor %}
+  {% endif %}
+</section>

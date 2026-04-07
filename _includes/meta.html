@@ -1,0 +1,25 @@
+{% if page.layout == 'post' %}
+<meta name="author" content="{{ site.author.name }}">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "{{ page.title | escape }}",
+  "description": "{{ page.description | escape }}",
+  "url": "{{ site.url }}{{ page.url | replace: 'index.html', '' }}",
+  "datePublished": "{{ page.date | date_to_xmlschema }}",
+  "author": { "@type": "Person", "name": "{{ site.author.name }}" }
+  {% if page.image %}, "image": "{{ site.url }}{{ page.image }}"{% endif %}
+}
+</script>
+{% elsif page.url == '/' %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "url": "{{ site.url }}/",
+  "name": "{{ site.title }}",
+  "description": "{{ site.description }}"
+}
+</script>
+{% endif %}
